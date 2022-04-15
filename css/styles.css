@@ -1,0 +1,13 @@
+.header{
+  font-size: 35px;
+}
+.card{
+  width: 400px;
+  height: 280px;
+}
+.shead{
+  font-size:23px ;
+}
+#forms{
+  display: none;
+}

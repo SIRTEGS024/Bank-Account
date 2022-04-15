@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/jquery-3.6.0.js"></script>
+  <script src="js/scripts.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container"><br><br><br>
+    <h1 class="header">WELCOME TO ACEDU CREDIT UNION!</h1><br>
+    <div class="radio">
+      <label for="">New Customer</label>
+      <input type="radio" name="accountType" value="new" checked>
+      <label for="">Existing Account</label>
+      <input type="radio" name="accountType" value="current">
+    </div>
+    <div class="row" >
+      <div id="forms">
+        <!-- <div class="col-sm-5"> -->
+        <form id="newAccForm" action="index.html" method="post">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="shead">REGISTER A NEW ACCOUNT:</h2><br>
+              <div class="form-group row">
+                <label for="account-name" class="col-sm-5 col-form-label">Account Name:</label>
+                <div class="col-sm-2">
+                  <input type="text" class="form-control" id="account-name" style="width:180px;">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="initial-amount" class="col-sm-5 col-form-label">Initial Deposit:</label>
+                <div class="col-sm-5">
+                  <input type="number" class="form-control" id="initial-amount" style="width:130px;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- </div> -->
+        <!-- <div class="col-sm-5"> -->
+        <form class="transactionForm" action="index.html" method="post">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="shead">DEPOSIT OR WITHDRAW FUNDS:</h2><br>
+              <div class="form-group row">
+                <label for="account-name" class="col-sm-5 col-form-label">Account Name:</label>
+                <div class="col-sm-2">
+                  <input type="text" class="form-control" id="account-name" style="width:180px;">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="initial-amount" class="col-sm-7 col-form-label">Deposit Amount:</label>
+                <div class="col-sm-3">
+                  <input type="number" class="form-control" id="initial-amount" style="width:120px;">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="initial-amount" class="col-sm-7 col-form-label">Withdrawal Amount:</label>
+                <div class="col-sm-3">
+                  <input type="number" class="form-control" id="initial-amount" style="width:120px;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="bankDiv transactionForm">
+        <select id="accSelect" name="">
+
+        </select>
+        <div id="showInfo">
+
+          <p>Name: <span></span></p>
+        </div>
+      </div>
+      <!-- </div> -->
+    </div>
+  
+
+
+
+  </div>
+</body>
+
+</html>
