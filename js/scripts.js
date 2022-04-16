@@ -53,3 +53,19 @@ Account.prototype.getHistory = function() {
 }
 
 
+$(document).ready(function() {
+  let bank = new Bank();
+  $("input:radio[value=new]").click(function() {
+      $("#current").hide();
+      $("#new").fadeIn("slow");
+  });
+  $("input:radio[value=current]").click(function() {
+      $("#current").fadeIn("slow");
+      $("#new").hide();
+  });
+
+
+
+
+
+});

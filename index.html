@@ -22,8 +22,8 @@
       <input type="radio" name="accountType" value="current">
     </div>
     <div class="row">
-      <div id="forms">
-        <form id="newAccForm" action="index.html" method="post">
+      <div id="new">
+        <form class="newAccForm" action="index.html" method="post">
           <div class="card">
             <div class="card-body">
               <h2 class="shead">REGISTER A NEW ACCOUNT:</h2><br>
@@ -39,11 +39,13 @@
                   <input type="number" class="form-control" id="initial-amount" style="width:130px;">
                 </div>
               </div>
+              <button class="btn btn-dark" type="submit" name="button">Create Account</button>
             </div>
           </div>
-          <button class="btn btn-dark" type="submit" name="button">Create Account</button>
         </form>
-        <form class="transactionForm" action="index.html" method="post">
+      </div>
+      <div id="current">
+        <form id="transactionForm" action="index.html" method="post">
           <div class="card">
             <div class="card-body">
               <h2 class="shead">DEPOSIT OR WITHDRAW FUNDS:</h2><br>
@@ -65,9 +67,9 @@
                   <input type="number" class="form-control" id="initial-amount" style="width:120px;">
                 </div>
               </div>
+              <button class="btn btn-dark" type="submit" name="button">Process Transaction</button>
             </div>
           </div>
-          <button class="btn btn-dark" type="submit" name="button">Create Account</button>
         </form>
       </div>
       <div class="bankDiv transactionForm">
