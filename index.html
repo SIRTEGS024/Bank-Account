@@ -15,6 +15,7 @@
 <body>
   <div class="container"><br><br><br>
     <h1 class="header">WELCOME TO ACEDU CREDIT UNION!</h1><br>
+    <p id="warn">INSUFFICIENT FUNDS!!</p>
     <div class="radio">
       <label for="">New Customer</label>
       <input type="radio" name="accountType" value="new" checked>
@@ -23,20 +24,20 @@
     </div>
     <div class="row">
       <div id="new">
-        <form class="newAccForm" action="index.html" method="post">
+        <form class="newAccForm">
           <div class="card">
             <div class="card-body">
               <h2 class="shead">REGISTER A NEW ACCOUNT:</h2><br>
               <div class="form-group row">
-                <label for="account-name" class="col-sm-5 col-form-label">Account Name:</label>
+                <label for="inputName" class="col-sm-5 col-form-label">Account Name:</label>
                 <div class="col-sm-2">
-                  <input type="text" class="form-control" id="account-name" style="width:180px;">
+                  <input type="text" class="form-control" id="inputName" style="width:180px;" required>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="initial-amount" class="col-sm-5 col-form-label">Initial Deposit:</label>
+                <label for="initialDeposit" class="col-sm-5 col-form-label">Initial Deposit:</label>
                 <div class="col-sm-5">
-                  <input type="number" class="form-control" id="initial-amount" style="width:130px;">
+                  <input type="number" class="form-control" id="initialDeposit" style="width:130px;" required>
                 </div>
               </div>
               <button class="btn btn-dark" type="submit" name="button">Create Account</button>
@@ -45,26 +46,20 @@
         </form>
       </div>
       <div id="current">
-        <form id="transactionForm" action="index.html" method="post">
+        <form id="transactionForm">
           <div class="card">
             <div class="card-body">
               <h2 class="shead">DEPOSIT OR WITHDRAW FUNDS:</h2><br>
               <div class="form-group row">
-                <label for="account-name" class="col-sm-5 col-form-label">Account Name:</label>
-                <div class="col-sm-2">
-                  <input type="text" class="form-control" id="account-name" style="width:180px;">
+                <label for="newDeposit" class="col-sm-7 col-form-label">Deposit Amount:</label>
+                <div class="col-sm-3">
+                  <input type="number" class="form-control" id="newDeposit" style="width:120px;">
                 </div>
               </div>
               <div class="form-group row">
-                <label for="initial-amount" class="col-sm-7 col-form-label">Deposit Amount:</label>
+                <label for="newWithdraw" class="col-sm-7 col-form-label">Withdrawal Amount:</label>
                 <div class="col-sm-3">
-                  <input type="number" class="form-control" id="initial-amount" style="width:120px;">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="initial-amount" class="col-sm-7 col-form-label">Withdrawal Amount:</label>
-                <div class="col-sm-3">
-                  <input type="number" class="form-control" id="initial-amount" style="width:120px;">
+                  <input type="number" class="form-control" id="newWithdraw" style="width:120px;">
                 </div>
               </div>
               <button class="btn btn-dark" type="submit" name="button">Process Transaction</button>
@@ -82,13 +77,13 @@
         </div>
       </div>
     </div>
-    <div id="balanceDisp"class="well">
+    <div id="balanceDisp" class="well">
       <p>Name: <span id="accName"></span></p>
       <p>Account Number: <span id="accNum"></span></p>
       <p>Current Balance: <span id="curBal"></span></p>
       <p>Account History: <span id="accHistory"></span></p>
     </div>
-
+   
 
   </div>
 </body>

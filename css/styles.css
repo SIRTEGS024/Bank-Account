@@ -11,3 +11,15 @@
 #current{
   display: none;
 }
+#balanceDisp {
+  display: none;
+}
+.negative {
+  color: red;
+}
+#warn{
+  background-color: red;
+  width: 250px;
+  display: none;
+  font-weight: bold;
+}

@@ -1,15 +1,23 @@
 function Bank() {
-  this.accounts = {},
+  this.accounts = {};
   this.currentId = 2209146835;
 }
 Bank.prototype.assignID = function () {
   this.currentId += 1268;
   return this.currentId;
 };
-Bank.prototype.addAccount = function(account) {
+Bank.prototype.addAccount = function (account) {
   account.id = this.assignID();
   this.accounts[account.id] = account
 }
+Bank.prototype.deleteAccount = function (id) {
+  if (this.accounts[id] === undefined) {
+    return false;
+  }
+  delete this.accounts[id];
+  return true;
+};
+
 Bank.prototype.findAccount = function (id) {
   if (this.accounts[id] != undefined) {
     return this.accounts[id];
@@ -18,73 +26,103 @@ Bank.prototype.findAccount = function (id) {
 };
 
 function account(name, balance) {
-  this.name = name,
-  this.balance = balance,
-  this.history = [balance];
+  this.name = name
+  this.balance = balance
+  this.history = ["$"+ balance]
 }
-account.prototype.makeDeposit = function(amount) {
+account.prototype.makeDeposit = function (amount) {
   this.balance += parseInt(amount);
-  this.history.push("Credit:" + amount);
+  this.history.push("Credit:$" + amount);
 }
-account.prototype.makeWithdrawl = function(amount) {
-  if(amount > this.balance) {
-    alert("Not enough funds! You only have: $" + this.balance);
+account.prototype.makeWithdrawl = function (amount) {
+  if (amount > this.balance) {
+    $("#warn").show();
   } else {
     this.balance -= parseInt(amount);
-    this.history.push("Debit:" + amount);
+    this.history.push("Debit:$" + amount);
   }
 }
-account.prototype.getHistory = function() {
+account.prototype.getHistory = function () {
   let output = "";
-  Object.keys(this.history).forEach(function (key) {
-    if(this.history[key].toString().includes("Debit")){
-      output += "<span class='negative'>$" + this.history[key] + "</span>";
+  for(let i=0; i<this.history.length; i++) {
+    if(this.history[i].toString().includes("Debit")){
+      output += "<span class='negative'>" + this.history[i] + "</span>";
     } else {
-      output += "$" + this.history[key];
+      output +=  this.history[i];
     }
-    if(key < this.history.length-1) {
+    if(i < this.history.length-1) {
       output += ", ";
     }
-  });
+  }
   return output;
 }
+
 let bank = new Bank();
 
-function displayAccs(bankToDisplay){
+function displayAccount(bank) {
   let accList = $("#accSelect");
   let accHTML = "";
-  Object.keys(bankToDisplay.accounts).forEach(function (key) {
-    const account = bankToDisplay.findAccount(key);
+  Object.keys(bank.accounts).forEach(function (key) {
+    const account = bank.findAccount(key);
     accHTML += "<option id=" + account.id + ">" + account.name + "</option>";
   });
   accList.html(accHTML);
 }
 function showAccount(accountId) {
   const account = bank.findAccount(accountId);
-  $("##balanceDisp").show();
+  $("#balanceDisp").show();
   $("#accName").html(account.name);
   $("#accNum").html(account.id);
   $("#curBal").html("$" + account.balance);
   $("#accHistory").html(account.getHistory());
-  let buttons = $("#buttons");
-  buttons.empty();
-  buttons.append("<button class='deleteButton' id=" + + account.id + ">Delete</button>");
 }
 
 
-
-$(document).ready(function() {
-  $("input:radio[value=new]").click(function() {
-      $("#current").hide();
-      $("#new").fadeIn("slow");
+$(document).ready(function () {
+  $("input:radio[value=new]").click(function () {
+    $("#current").hide();
+    $("#new").fadeIn("slow");
   });
-  $("input:radio[value=current]").click(function() {
-      $("#current").fadeIn("slow");
-      $("#new").hide();
+  $("input:radio[value=current]").click(function () {
+    $("#current").fadeIn("slow");
+    $("#new").hide();
+  });
+});
+function getSelectedAccount() {
+  return parseInt($("#accSelect").children(":selected").attr("id"));
+}
+
+$(document).ready(function () {
+  $(".newAccForm").submit(function (event) {
+    event.preventDefault();
+    let name = $("#inputName").val();
+    let deposit = parseInt($("#initialDeposit").val());
+    let newAccount = new account(name, deposit);
+    bank.addAccount(newAccount);
+    $("#inputName").val("");
+    $("#initialDeposit").val("");
+    displayAccount(bank);
+    showAccount(getSelectedAccount());
   });
 
 
-
-
-
+  $("#transactionForm").submit(function (event) {
+    event.preventDefault();
+    let deposit = $("#newDeposit").val();
+    let withdraw = $("#newWithdraw").val();
+    $("#newDeposit").val("");
+    $("#newWithdraw").val("");
+    if (getSelectedAccount()) {
+      if (deposit) {
+        bank.findAccount(getSelectedAccount()).makeDeposit(deposit);
+      }
+      if (withdraw) {
+        bank.findAccount(getSelectedAccount()).makeWithdrawl(withdraw);
+      }
+      showAccount(getSelectedAccount());
+    }
+  });
+  $("#accSelect").change(function () {
+    showAccount(getSelectedAccount());
+  });
 });
