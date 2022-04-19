@@ -1,3 +1,4 @@
+// BUSINESS LOGIC
 function Bank() {
   this.accounts = {};
   this.currentId = 2209146835;
@@ -28,9 +29,10 @@ Bank.prototype.findAccount = function (id) {
 function account(name, balance) {
   this.name = name
   this.balance = balance
-  this.history = ["$"+ balance]
+  this.history = ["Credit:$"+ balance]
 }
 account.prototype.makeDeposit = function (amount) {
+  $("#warn").hide();
   this.balance += parseInt(amount);
   this.history.push("Credit:$" + amount);
 }
@@ -38,6 +40,7 @@ account.prototype.makeWithdrawl = function (amount) {
   if (amount > this.balance) {
     $("#warn").show();
   } else {
+    $("#warn").hide();
     this.balance -= parseInt(amount);
     this.history.push("Debit:$" + amount);
   }
@@ -76,8 +79,11 @@ function showAccount(accountId) {
   $("#curBal").html("$" + account.balance);
   $("#accHistory").html(account.getHistory());
 }
+function getSelectedAccount() {
+  return parseInt($("#accSelect").children(":selected").attr("id"));
+}
 
-
+// UI
 $(document).ready(function () {
   $("input:radio[value=new]").click(function () {
     $("#current").hide();
@@ -88,9 +94,6 @@ $(document).ready(function () {
     $("#new").hide();
   });
 });
-function getSelectedAccount() {
-  return parseInt($("#accSelect").children(":selected").attr("id"));
-}
 
 $(document).ready(function () {
   $(".newAccForm").submit(function (event) {
