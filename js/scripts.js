@@ -30,7 +30,8 @@ function account(name, balance) {
   this.name = name
   this.balance = balance
   this.history = ["Credit:$"+ balance]
-}
+  }
+
 account.prototype.makeDeposit = function (amount) {
   $("#warn").hide();
   this.balance += parseInt(amount);
@@ -100,12 +101,18 @@ $(document).ready(function () {
     event.preventDefault();
     let name = $("#inputName").val();
     let deposit = parseInt($("#initialDeposit").val());
+    if (deposit < 1000) {
+      $("#balanceDisp").hide();
+      $("#warn2").show();
+    } else {
+      $("#warn2").hide();
     let newAccount = new account(name, deposit);
     bank.addAccount(newAccount);
     $("#inputName").val("");
     $("#initialDeposit").val("");
     displayAccount(bank);
     showAccount(getSelectedAccount());
+    }
   });
 
 

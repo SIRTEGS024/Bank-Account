@@ -24,3 +24,12 @@
   display: none;
   font-weight: bold;
 }
+body{
+  background-color: rgb(126, 92, 92);
+}
+#warn2{
+  background-color: red;
+  width: 390px;
+  display: none;
+  font-weight: bold;
+}
