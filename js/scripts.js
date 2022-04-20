@@ -29,8 +29,8 @@ Bank.prototype.findAccount = function (id) {
 function account(name, balance) {
   this.name = name
   this.balance = balance
-  this.history = ["Credit:$"+ balance]
-  }
+  this.history = ["Credit:$" + balance]
+}
 
 account.prototype.makeDeposit = function (amount) {
   $("#warn").hide();
@@ -48,13 +48,13 @@ account.prototype.makeWithdrawl = function (amount) {
 }
 account.prototype.getHistory = function () {
   let output = "";
-  for(let i=0; i<this.history.length; i++) {
-    if(this.history[i].toString().includes("Debit")){
+  for (let i = 0; i < this.history.length; i++) {
+    if (this.history[i].toString().includes("Debit")) {
       output += "<span class='negative'>" + this.history[i] + "</span>";
     } else {
-      output +=  this.history[i];
+      output += this.history[i];
     }
-    if(i < this.history.length-1) {
+    if (i < this.history.length - 1) {
       output += ", ";
     }
   }
@@ -79,10 +79,21 @@ function showAccount(accountId) {
   $("#accNum").html(account.id);
   $("#curBal").html("$" + account.balance);
   $("#accHistory").html(account.getHistory());
+  let buttons = $("#buttons");
+  buttons.empty();
+  buttons.append("<button class='deleteButton' id=" +  + account.id + ">Delete</button>");
 }
 function getSelectedAccount() {
   return parseInt($("#accSelect").children(":selected").attr("id"));
 }
+function attachAccountListeners() {
+  $("#buttons").on("click", ".deleteButton", function() {
+    bank.deleteAccount(this.id);
+    $("#balanceDisp").hide();
+    displayAccount(bank);
+  });
+}
+
 
 // UI
 $(document).ready(function () {
@@ -97,6 +108,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+  attachAccountListeners();
   $(".newAccForm").submit(function (event) {
     event.preventDefault();
     let name = $("#inputName").val();
@@ -106,12 +118,12 @@ $(document).ready(function () {
       $("#warn2").show();
     } else {
       $("#warn2").hide();
-    let newAccount = new account(name, deposit);
-    bank.addAccount(newAccount);
-    $("#inputName").val("");
-    $("#initialDeposit").val("");
-    displayAccount(bank);
-    showAccount(getSelectedAccount());
+      let newAccount = new account(name, deposit);
+      bank.addAccount(newAccount);
+      $("#inputName").val("");
+      $("#initialDeposit").val("");
+      displayAccount(bank);
+      showAccount(getSelectedAccount());
     }
   });
 
